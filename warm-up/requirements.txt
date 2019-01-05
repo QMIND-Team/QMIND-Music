@@ -1,0 +1,5 @@
+scikit-learn
+pandas
+numpy
+scipy
+git+https://github.com/QMIND-Team/spotify_api_client.git

@@ -20,18 +20,17 @@ def analysis(column):
     features_test = df.loc[2001:3500, fields].values
     labels_test = df.loc[2001:3500, label_field].values
     clf = tree.DecisionTreeClassifier()
-    clf.fit(features_train,labels_train)   
+    clf.fit(features_train, labels_train)
     count = 0
     for i, feature in enumerate(features_test):
         output = clf.predict([feature])
-        #print(output)
+        # print(output)
         if(output == labels_test[i]):
             count += 1
-    
-    print (count/len(features_test)*100, "%")
+
+    print(count/len(features_test)*100, "%")
 
 
 for feature in feature_fields:
     print(f'feature:{feature}')
     analysis(feature)
-    

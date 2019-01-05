@@ -3,7 +3,7 @@ from sklearn import tree
 import itertools as it
 
 # Read the CSV
-df = pd.read_csv('song_list_2.csv')
+df = pd.read_csv('song_list.csv')
 # Relevant columns for features and labels
 feature_fields = ['danceability', 'energy',
                   'key', 'loudness', 'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'tempo']
@@ -27,17 +27,17 @@ def newAnalysis(colSet):
     features_test = df.loc[2001:3987, fields].values
     labels_test = df.loc[2001:3987, label_field].values
 
-    clf = tree.DecisionTreeClassifier() #importing the decision tree classifier
-    #learning algorithm finds patterns in training data to create rules for classifier
-    clf = clf.fit(features_train, labels_train) #create learning algorithm
+    clf = tree.DecisionTreeClassifier()  # importing the decision tree classifier
+    # learning algorithm finds patterns in training data to create rules for classifier
+    clf = clf.fit(features_train, labels_train)  # create learning algorithm
 
-    #loop over every song, predict, compare to real value, keep track of accuracy
+    # loop over every song, predict, compare to real value, keep track of accuracy
     score = 0
     for i, feature in enumerate(features_test):
         result = clf.predict([feature])
         if (result == labels_test[i]):
             score += 1
-        
+
     accuracy = (score/len(features_test))*100
     print(accuracy)
     return accuracy
@@ -52,10 +52,7 @@ print(results2)
 
 maxValKey = max(results2, key=results2.get)
 
-print (f'maximum accuracy: {results2[maxValKey]}')
-print (f'best keys to use: {maxValKey}')
-#note: ctrl+c stops the terminal while it is running
-#note: must have cursor in code to use ctrl+r and run code
-
-
-
+print(f'maximum accuracy: {results2[maxValKey]}')
+print(f'best keys to use: {maxValKey}')
+# note: ctrl+c stops the terminal while it is running
+# note: must have cursor in code to use ctrl+r and run code
