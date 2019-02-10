@@ -1,13 +1,12 @@
 """
 A library for all functions data related
 """
-
+import pandas as pd
+import requests
+import os
 
 # Downloads mp3s and jpgs from the dataset
 def create_songs_and_images():
-    import pandas as pd
-    import requests
-    import os
     
     #create the folder to hold the data
     path1 = 'data/song_preview_clips'
