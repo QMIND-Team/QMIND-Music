@@ -1,0 +1,28 @@
+.Header-root {
+  width: 100vw;
+  background: black;
+}
+
+.Header-content {
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 10px;
+}
+
+.Header-logo {
+  border-radius: 5px;
+}
+
+.Header-right > a {
+  color: white;
+  text-decoration: none;
+  margin-left: 50px;
+  font-weight: bold;
+}
+
+.Header-right > a:hover {
+  text-decoration: underline;
+}
