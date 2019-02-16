@@ -1,0 +1,51 @@
+.About-root {
+  margin-top: 100px;
+}
+
+.About-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-top: 20px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.About-img {
+  width: 60%;
+  padding: 50px;
+}
+
+.About-p {
+  width: 100%;
+  text-align: left;
+  padding: 50px;
+  padding-top: 0px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.About-p > p {
+  width: 80%;
+}
+
+.About-bottom-p {
+  margin-left: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .About-bottom-p {
+    margin-left: 0px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .About-main {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.About-fineprint {
+  font-size: 10px;
+  margin-bottom: 20px;
+}
