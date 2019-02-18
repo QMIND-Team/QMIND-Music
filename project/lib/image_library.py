@@ -5,16 +5,11 @@ import cv2
 import numpy as np
 from scipy.misc import imread
 import glob
-#patch2 options : add colour value instead of 0s as additional vectors
-#               : repeat vectors to fill additional spots
-#               : use colour value or number of vectors as a multiplier
+
 #list of images features for all images in data/small_album_images
 def create_image_feature_array():
     images = glob.glob('data/small_album_images/*.jpg')
-    num_images = len(images)
-    feature_array = [None for i in range(num_images)]
-    for im in range(num_images):
-        feature_array[im] = get_image_features(images[im])
+    feature_array = [get_image_features(img) for img in images]
     return feature_array
 
 # Turn an image file into an array of features, returns 0s if fails
@@ -24,8 +19,6 @@ def get_image_features(image_path):
         return features
     else:
         features = resize_array(features)
-        if(check_size(features)):
-            print("successfully changes")
         return features
 
 #ensures array is size 200*64
@@ -42,7 +35,7 @@ def resize_array(array):
         array = np.concatenate([array, zero_vector])
     return array
 
-#returns 1 if array is correct size, else 0
+#returns True if array is correct size, else False
 def check_size(array):
     correct_size = True
     if(len(array) != 200):
@@ -72,5 +65,3 @@ def extract_features(image_path, vector_size=200):
         print ('Error: ', e)
         return [np.zeros(64) for i in range(200)]
     return dsc
-
-create_image_feature_array()
