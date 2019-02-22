@@ -1,14 +1,10 @@
 """
 A library for all music-related functions
 """
-import os
+from os import walk
 import glob
 from music21 import note, stream, converter
 import math
-
-# Takes an mp3 song as input and outputs a midi file
-def convert_mp3_to_midi(song_path, midi_path):
-    pass
 
 
 # Takes a midi song as an input and outputs an array of features
@@ -32,9 +28,7 @@ def get_song_features(midi_path):
     #Putting midi pitch, note name (number from 1 to 12), and duration in an array of dictionaries
     output_notes = []
     final_arr = [0]* 60
-    offset = 0
     for note in newscore.flat.notes:
-        new_note = note.pitch.midi
         output_notes.append({
             'note': (note.pitch.midi-20)%12,
             'real_note': (note.pitch.midi),
@@ -54,4 +48,15 @@ def get_song_features(midi_path):
         
     return final_arr
 
+def create_song_features_array(midi_path):
+    
+    song_features_array = []    
+    # loops through midi files
+    for (dirpath, dirnames, filenames) in walk("data/midi_songs"):
+        for file_name in filenames:
+            #calls the previous function and appends it to final 2d array
+            song_features = get_song_features(f"data/midi_songs/{file_name}")
+            song_features_array.append(song_features)
+
+    return song_features_array
 
