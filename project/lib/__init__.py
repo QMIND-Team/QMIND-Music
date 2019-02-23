@@ -1,3 +1,4 @@
-from lib.music_library import get_song_features, convert_mp3_to_midi
-from lib.data_library import create_songs_and_images
-from lib.image_library import get_image_features
+from lib.music_library import *
+from lib.data_library import *
+from lib.image_library import *
+from lib.midi_library import *

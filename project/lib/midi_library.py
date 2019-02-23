@@ -1,3 +1,6 @@
+"""
+A library for all functions MIDI-related
+"""
 import vamp
 import librosa
 import numpy as np
@@ -9,9 +12,6 @@ from midiutil.MidiFile import MIDIFile
 """
 Convert from MIDI format to an array of notes
 """
-
-print(vamp.list_plugins())
-print(vamp.vampyhost.get_plugin_path())
 
 
 def midi_to_notes(midi, fs, hop, smooth, minduration):
@@ -107,25 +107,29 @@ def save_midi(outfile, notes, tempo):
     binfile.close()
 
 
-smooth = 0.25
-minduration = 0.1
-fs = 44100
-hop = 128
+"""
+Convert all mp3 files to MIDI
+"""
 
 
-f = []
-for (dirpath, dirnames, filenames) in walk("data/song_preview_clips"):
-    for file_name in filenames:
-        data, sr = librosa.load(
-            f"data/song_preview_clips/{file_name}", sr=fs, mono=True)
+def create_midi_files():
+    smooth = 0.25
+    minduration = 0.1
+    fs = 44100
+    hop = 128
 
-        melody = vamp.collect(data, sr, "mtg-melodia:melodia",
-                              parameters={"voicing": 0.2})
+    for (_, _, filenames) in walk("data/song_preview_clips"):
+        for file_name in filenames:
+            data, sr = librosa.load(
+                f"data/song_preview_clips/{file_name}", sr=fs, mono=True)
 
-        pitch = melody['vector'][1]
-        midi_pitch = hz2midi(pitch)
+            melody = vamp.collect(data, sr, "mtg-melodia:melodia",
+                                  parameters={"voicing": 0.2})
 
-        notes = midi_to_notes(midi_pitch, fs, hop, smooth, minduration)
-        save_midi(
-            f'data/midi_songs/{file_name.replace(".mp3", ".mid")}', notes, 115)
-        print(f"converted {file_name}")
+            pitch = melody['vector'][1]
+            midi_pitch = hz2midi(pitch)
+
+            notes = midi_to_notes(midi_pitch, fs, hop, smooth, minduration)
+            save_midi(
+                f'data/midi_songs/{file_name.replace(".mp3", ".mid")}', notes, 115)
+            print(f"converted {file_name}")
