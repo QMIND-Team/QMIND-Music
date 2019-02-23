@@ -5,7 +5,7 @@ import vamp
 import librosa
 import numpy as np
 
-from os import walk
+from os import walk, path, mkdir, listdir
 from scipy.signal import medfilt
 from midiutil.MidiFile import MIDIFile
 
@@ -117,6 +117,14 @@ def create_midi_files():
     minduration = 0.1
     fs = 44100
     hop = 128
+
+    # Make the folder if it doesn't already exist
+    if not path.isdir('data/song_preview_clips'):
+        mkdir('data/song_preview_clips')
+
+    # If files are already in the folder we are done
+    if len(listdir('data/song_preview_clips')) != 0:
+        return
 
     for (_, _, filenames) in walk("data/song_preview_clips"):
         for file_name in filenames:
