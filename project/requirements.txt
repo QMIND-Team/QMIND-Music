@@ -1,4 +1,7 @@
+numpy
+midiutil
 pandas
+matplotlib
 pillow
 requests
 tensorflow
