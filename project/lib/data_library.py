@@ -9,7 +9,6 @@ import os
 
 
 def create_songs_and_images():
-
     # create the folder to hold the data
     path1 = 'data/song_preview_clips'
     path2 = 'data/small_album_images'
@@ -25,6 +24,10 @@ def create_songs_and_images():
     # read the csv from the data folder into a pandas dataframe
     df = pd.read_csv('data/trackData.csv')
 
+    path1_is_empty = len(os.listdir(path1)) == 0
+    path2_is_empty = len(os.listdir(path2)) == 0
+    path3_is_empty = len(os.listdir(path3)) == 0
+
     for num in range(df.shape[0]):  # iterate over every row
         row = df.loc[num, :]  # take one row with every corresponding column
 
@@ -34,12 +37,12 @@ def create_songs_and_images():
         large_pic_url = row[2]
 
         # get the files and put them in the folders
-        if len(os.listdir(path1)) == 0:
+        if path1_is_empty:
             r = requests.get(str(preview_url), allow_redirects=True)
             open(f'{path1}/{track_id}_preview.mp3', 'wb').write(r.content)
-        if len(os.listdir(path2)) == 0:
+        if path2_is_empty:
             s = requests.get(str(pic_url), allow_redirects=True)
             open(f'{path2}/{track_id}_art.jpg', 'wb').write(s.content)
-        if len(os.listdir(path3)) == 0:
+        if path3_is_empty:
             t = requests.get(str(large_pic_url), allow_redirects=True)
             open(f'{path3}/{track_id}_big_art.jpg', 'wb').write(t.content)
