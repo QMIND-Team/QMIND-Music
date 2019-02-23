@@ -12,7 +12,7 @@ import glob
 def create_image_feature_array():
     images = glob.glob('data/large_album_images/*.jpg')
     feature_array = [get_image_features(img) for img in images]
-    return feature_array
+    return np.array(feature_array)
 
 # Turn an image file into an array of features, returns 0s if fails
 

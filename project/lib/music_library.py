@@ -2,6 +2,8 @@
 A library for all music-related functions
 """
 from os import walk
+
+import numpy as np
 import glob
 from music21 import note, stream, converter
 import math
@@ -61,4 +63,4 @@ def create_song_features_array():
             song_features = get_song_features(f"data/midi_songs/{file_name}")
             song_features_array.append(song_features)
 
-    return song_features_array
+    return np.array(song_features_array)
