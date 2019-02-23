@@ -18,15 +18,11 @@ image_features = create_image_feature_array()
 print("Training the network")
 model = create_network()
 
-filepath = "weights/improvement-{epoch:02d}-{loss:.4f}-bigger.hdf5"
-checkpoint = ModelCheckpoint(filepath,
+checkpoint = ModelCheckpoint("weights.hdf5",
                              monitor='loss',
                              verbose=0,
                              save_best_only=True,
                              mode='min')
 
-if not path.isdir("weights"):
-    mkdir("weights")
-
 model.fit(image_features, song_features, batch_size=100,
-          epochs=400000, callbacks=[checkpoint])
+          epochs=4000, callbacks=[checkpoint])
