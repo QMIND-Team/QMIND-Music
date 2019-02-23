@@ -1,2 +1,11 @@
 pandas
+pillow
 requests
+tensorflow
+keras
+opencv-python
+numpy
+scipy
+librosa
+music21
+vamp
