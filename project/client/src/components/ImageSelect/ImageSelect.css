@@ -51,6 +51,34 @@
   margin-top: -4px;
 }
 
+.ImageSelect-input {
+  display: none;
+}
+
+.ImageSelect-p {
+  color: black;
+}
+
+.ImageSelect-image-container {
+  overflow: hidden;
+  height: 80%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ImageSelect-btn-container {
+  margin-top: 20px;
+}
+
+.ImageSelect-create-song {
+  background: green;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 @media only screen and (max-width: 840px) and (min-width: 400px) {
   .ImageSelect-button {
     margin-top: -20%;
