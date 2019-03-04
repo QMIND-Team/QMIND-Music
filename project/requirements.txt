@@ -12,3 +12,5 @@ scipy
 librosa
 music21
 vamp
+flask
+flask-cors
