@@ -17,8 +17,8 @@ def create_image_feature_array():
 # Turn an image file into an array of features, returns 0s if fails
 
 
-def get_image_features(image_path):
-    features = extract_features(image_path)
+def get_image_features(image_path,  vector_size=200, img=None,):
+    features = extract_features(image_path, vector_size, img)
     if(check_size(features)):
         return features
     else:
@@ -56,8 +56,8 @@ def check_size(array):
 # returns feature list of size 200*64
 
 
-def extract_features(image_path, vector_size=200):
-    image = imread(image_path, mode="RGB")
+def extract_features(image_path, vector_size=200, img=None):
+    image = img if img is not None else imread(image_path, mode="RGB")
     try:
         alg = cv2.KAZE_create()
         # Finding image keypoints
