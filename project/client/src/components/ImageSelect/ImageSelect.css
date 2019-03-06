@@ -79,6 +79,10 @@
   padding: 5px;
 }
 
+.ImageSelect-media {
+  width: 80%;
+}
+
 @media only screen and (max-width: 840px) and (min-width: 400px) {
   .ImageSelect-button {
     margin-top: -20%;
