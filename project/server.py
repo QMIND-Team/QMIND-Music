@@ -3,13 +3,13 @@ import cv2
 import numpy as np
 
 from time import time
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from flask_cors import CORS
 from google.cloud import storage
 
 from lib import *
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="client/build/static")
 CORS(app)
 
 model = create_network()
@@ -36,6 +36,16 @@ def song():
     song_blob = bucket.blob(f'song-{time()}.mp3')
     song_blob.upload_from_filename('output.mp3')
     return song_blob.public_url
+
+
+# Serve React App
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists("client/build/" + path):
+        return send_from_directory('client/build', path)
+    else:
+        return send_from_directory('client/build', 'index.html')
 
 
 app.run(host='0.0.0.0', port=os.getenv('PORT') or 4000)
