@@ -18,6 +18,7 @@ function onInputChange(e) {
 }
 
 function onCreateSong(e) {
+  e.stopPropagation();
   const data = new FormData();
   data.append("image", this.state.imageFile);
   this.setState({ songLoading: true });
@@ -25,9 +26,14 @@ function onCreateSong(e) {
     method: "POST",
     url: `${SERVER_URL}/song`,
     data
-  }).then(res => {
-    this.setState({ songLoading: false, songUrl: res.data });
-  });
+  })
+    .then(res => {
+      this.setState({ songLoading: false, songUrl: res.data });
+    })
+    .catch(err => {
+      alert("Something went wrong, please try again!");
+      this.setState({ songLoading: false });
+    });
 }
 
 function displayImage(url, songUrl, songLoading, obj) {
@@ -118,6 +124,7 @@ class ImageSelect extends Component {
             type="file"
             accept="image/*"
             onChange={onInputChange.bind(this)}
+            disabled={this.state.imageFile}
           />
         </div>
       </div>

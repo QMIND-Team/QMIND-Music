@@ -48,4 +48,4 @@ def serve(path):
         return send_from_directory('client/build', 'index.html')
 
 
-app.run(host='0.0.0.0', port=os.getenv('PORT') or 4000)
+app.run(debug=True, host='0.0.0.0', port=os.environ['PORT'] or 4000)
