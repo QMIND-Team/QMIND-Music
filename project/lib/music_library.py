@@ -64,6 +64,8 @@ def create_song_features_array():
             song_features_array.append(song_features)
 
     return np.array(song_features_array)
+
+
 def output_to_wav(output_array):
     """ converts the output from the model to a MIDI file
         and then from MIDI to wav"""
@@ -80,3 +82,4 @@ def output_to_wav(output_array):
         note_array.append((synth_notes[i], 4))
     
     ps.make_wav(tuple(note_array), fn = 'output.wav')
+
