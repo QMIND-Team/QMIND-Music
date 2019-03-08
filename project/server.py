@@ -24,8 +24,9 @@ bucket = client.get_bucket('qmusicbucket')
 @app.route('/song', methods=['POST'])
 def song():
     # Get image from request
+    timestamp = time()
     image_file = request.files['image'].read()
-    image_blob = bucket.blob(f'img-{time()}')
+    image_blob = bucket.blob(f'img-{timestamp}')
     image_blob.upload_from_string(image_file)
     nparr = np.fromstring(image_file, np.uint8)
     image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
@@ -33,8 +34,10 @@ def song():
     # Feed image to neural net
     image_features = get_image_features(None, 200, image)
     output = model.predict(np.array([image_features]))
-    song_blob = bucket.blob(f'song-{time()}.mp3')
-    song_blob.upload_from_filename('output.mp3')
+    output_to_wav(output[0])
+
+    song_blob = bucket.blob(f'song-{timestamp}.wav')
+    song_blob.upload_from_filename('output.wav')
     return song_blob.public_url
 
 
@@ -48,4 +51,4 @@ def serve(path):
         return send_from_directory('client/build', 'index.html')
 
 
-app.run(debug=True, host='0.0.0.0', port=os.environ['PORT'] or 4000)
+app.run(debug=True, host='0.0.0.0', port=4000)
