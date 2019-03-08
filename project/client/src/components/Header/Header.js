@@ -16,8 +16,8 @@ export default () => (
       </div>
       <div className="Header-right" align="right">
         <a href="./">HOME</a>
-        <a href="./">GALLERY</a>
-        <a href="./">ABOUT</a>
+        <a href="#gallery">GALLERY</a>
+        <a href="#about">ABOUT</a>
       </div>
     </div>
   </header>

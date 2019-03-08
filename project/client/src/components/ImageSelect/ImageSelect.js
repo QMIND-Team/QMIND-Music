@@ -19,6 +19,7 @@ function onInputChange(e) {
 
 function onCreateSong(e) {
   e.stopPropagation();
+
   const data = new FormData();
   data.append("image", this.state.imageFile);
   this.setState({ songLoading: true });
@@ -68,7 +69,7 @@ function imageButton(songUrl, songLoading, obj) {
     );
 
   if (!songUrl)
-    return <Loader type="Oval" color="black" height={80} width={80} />;
+    return <Loader type="Oval" color="black" height={40} width={40} />;
 
   return (
     <audio

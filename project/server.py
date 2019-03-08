@@ -1,13 +1,17 @@
 import os
 import cv2
 import numpy as np
+import json
 
 from time import time
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
+from dotenv import load_dotenv
 from google.cloud import storage
 
 from lib import *
+
+load_dotenv()
 
 app = Flask(__name__, static_folder="client/build/static")
 CORS(app)
@@ -20,7 +24,9 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'google-config.json'
 client = storage.Client()
 bucket = client.get_bucket('qmusicbucket')
 
+gallery = []
 
+# Song creating route
 @app.route('/song', methods=['POST'])
 def song():
     # Get image from request
@@ -33,13 +39,23 @@ def song():
 
     # Feed image to neural net
     image_features = get_image_features(None, 200, image)
-    output = model.predict(np.array([image_features]))
-    output_to_wav(output[0])
+    [output] = model.predict(np.array([image_features]))
+    output_to_wav(output)
 
     song_blob = bucket.blob(f'song-{timestamp}.wav')
     song_blob.upload_from_filename('output.wav')
+
+    if len(gallery) == 12:
+        gallery.pop()
+    gallery.insert(0, {'song': song_blob.public_url,
+                       'image': image_blob.public_url})
+
     return song_blob.public_url
 
+# Return the gallery of songs and images
+@app.route('/gallery')
+def gallery_rouute():
+    return json.dumps(gallery)
 
 # Serve React App
 @app.route('/', defaults={'path': ''})
@@ -51,4 +67,9 @@ def serve(path):
         return send_from_directory('client/build', 'index.html')
 
 
-app.run(debug=True, host='0.0.0.0', port=4000)
+port = 4000
+
+if 'PORT' in os.environ:
+    port = os.environ['PORT']
+
+app.run(host='0.0.0.0', port=port)
