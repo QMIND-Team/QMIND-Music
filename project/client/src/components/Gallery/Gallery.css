@@ -1,0 +1,55 @@
+.Gallery-root {
+  margin-top: 250px;
+}
+
+.Gallery-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  max-width: 1400px;
+}
+
+.Gallery-placeholder {
+  width: 250px;
+  height: 250px;
+  background: lightgrey;
+  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+.Gallery-image {
+  width: 75%;
+  height: 100%;
+}
+
+.Gallery-audio {
+  position: relative;
+  bottom: 55px;
+  z-index: 2;
+  width: 80%;
+}
+
+.loading {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+  background: #f6f6f6;
+  background: linear-gradient(to right, #f6f6f6 8%, #f0f0f0 18%, #f6f6f6 33%);
+  background-size: 800px 104px;
+  position: relative;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}

@@ -1,0 +1,104 @@
+.ImageSelect-root {
+  background: black;
+  color: white;
+}
+
+.ImageSelect-button {
+  background: rgba(255, 255, 255, 0.88);
+  transition: 0.5s;
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+  box-shadow: 0px 0px 50px rgb(110, 110, 100);
+  margin-top: -30%;
+  z-index: 2;
+}
+
+.ImageSelect-text {
+  padding-top: 50px;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ImageSelect-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transition: 0.5s;
+}
+
+.ImageSelect-camera {
+  width: 80%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ImageSelect-crescent {
+  width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1400px;
+}
+
+.ImageSelect-black {
+  background: black;
+  margin-bottom: 100px;
+}
+
+.ImageSelect-white {
+  background: white;
+  margin-top: -4px;
+}
+
+.ImageSelect-input {
+  display: none;
+}
+
+.ImageSelect-p {
+  color: black;
+}
+
+.ImageSelect-image-container {
+  overflow: hidden;
+  height: 80%;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ImageSelect-btn-container {
+  margin-top: 20px;
+}
+
+.ImageSelect-create-song {
+  background: green;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.ImageSelect-media {
+  width: 80%;
+}
+
+@media only screen and (max-width: 840px) and (min-width: 400px) {
+  .ImageSelect-button {
+    margin-top: -20%;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 840px) {
+  .ImageSelect-button {
+    margin-top: -15%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .ImageSelect-button {
+    width: 75vw;
+    height: 75vw;
+  }
+}

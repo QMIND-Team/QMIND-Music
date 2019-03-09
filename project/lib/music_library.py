@@ -69,17 +69,18 @@ def create_song_features_array():
 def output_to_wav(output_array):
     """ converts the output from the model to a MIDI file
         and then from MIDI to wav"""
-    
-    synth_notes = ['r','c4','d4','e4','f4','g4','a5','b5','c5','d5','e5','f5','g5','a6','b6']
+
+    synth_notes = ['r', 'c3', 'd3', 'e3', 'f3', 'g3', 'a4',
+                   'b4', 'c4', 'd4', 'e4', 'f4', 'g4', 'a5',
+                   'b5', 'c5', 'd5', 'e5', 'f5', 'g5', 'a6', 'b6', 'c6']
     note_array = []
 
-    #Find highest value in output array
+    # Find highest value in output array
     max = output_array.max()
-   
-    #Convert all values in output array based on highest value
-    for i in output_array:
-        i = math.floor(i*(15/max))
-        note_array.append((synth_notes[i], 4))
-    
-    ps.make_wav(tuple(note_array), fn = 'output.wav')
 
+    # Convert all values in output array based on highest value
+    for i in output_array:
+        i = math.floor(i*((len(synth_notes)-1)/max))
+        note_array.append((synth_notes[i], 4))
+
+    ps.make_wav(tuple(note_array), fn='output.wav')

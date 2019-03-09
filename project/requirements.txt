@@ -7,8 +7,12 @@ requests
 tensorflow
 keras
 opencv-python
-numpy
 scipy
 librosa
 music21
+flask
+flask-cors
+google-cloud-storage
 vamp
+python-dotenv
+pysynth
